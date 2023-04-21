@@ -1,0 +1,77 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<!-- Dropdown Structure -->
+<ul id="dropdown1" class="dropdown-content">
+
+    {% for cat in cats%}
+  <li><a href="/category/{{cat.url}}">{{cat.title}}</a></li>
+
+    {% endfor%}
+</ul>
+
+<nav>
+  <nav class="bg-primary" style="background:#FFA500;">
+  <div class="nav-wrapper" style="margin-right: 20px; margin-left: 30px;">
+    <a href="/home" class="brand-logo">Home</a>
+    <a href="#" data-target="mobile-menu" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    <ul class="right hide-on-small-and-down">
+      <li><a href="/about">About Us</a></li>
+      <li><a href="/admin">Admin</a></li>
+      <li><a href="/contactUs">Contact Us</a></li>
+      <!-- <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Category<i class="material-icons right">arrow_drop_down</i></a></li> -->
+    </ul>
+  </div>
+</nav>
+</nav>
+<ul class="sidenav" id="mobile-menu">
+  <li><a href="/home">Home</a></li>
+  <li><a href="/about">About Us</a></li>
+  <li><a href="/admin">Admin</a></li>
+  <li><a href="/contactUs">Contact Us</a></li>
+  <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Category<i class="material-icons right">arrow_drop_down</i></a></li>
+</ul>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var elems = document.querySelectorAll('.sidenav');
+  var instances = M.Sidenav.init(elems);
+  
+  var dropdownElems = document.querySelectorAll('.dropdown-trigger');
+  var dropdownInstances = M.Dropdown.init(dropdownElems);
+
+  var dropdownLinks = document.querySelectorAll('.dropdown-content a');
+  for (var i = 0; i < dropdownLinks.length; i++) {
+    dropdownLinks[i].addEventListener('click', function() {
+      instances[0].close();
+    });
+  }
+  
+  // Initialize dropdown options for desktop view
+  if (window.innerWidth > 600) {
+    var desktopDropdownElems = document.querySelectorAll('.dropdown-trigger:not(.mobile-only)');
+    var desktopDropdownInstances = M.Dropdown.init(desktopDropdownElems);
+  }
+  
+  // Hide dropdown options on window resize
+  window.addEventListener('resize', function() {
+    if (window.innerWidth <= 600) {
+      dropdownInstances.destroy();
+      desktopDropdownInstances.destroy();
+    } else {
+      dropdownInstances = M.Dropdown.init(dropdownElems);
+      desktopDropdownInstances = M.Dropdown.init(desktopDropdownElems);
+    }
+  });
+});
+
+</script>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Materialize JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+

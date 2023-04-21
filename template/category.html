@@ -1,0 +1,24 @@
+{%extends 'base.html'%}
+
+
+{%block title%} My Blogs {%endblock%}
+
+{%block content%}
+
+<div class="container-custom">
+    <h3>{{cat.title}}</h3>
+    <div class="image-container">
+        <img src="/media/{{cat.image}}" class="responsve-img" style="max-height:500px; width:95%; margin-left:25px;" alt="">
+
+    </div>
+
+
+      <div class="collection">
+          {% for p in posts%}
+        <a href="/blog/{{p.url}}" class="collection-item">{{p.title}}</a>
+<!--            <h6 style="margin-left:25px;">Click above</h6>-->
+          {%endfor%}
+      </div>
+</div>
+
+{%endblock%}
